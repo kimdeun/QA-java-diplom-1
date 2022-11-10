@@ -18,9 +18,9 @@ public class BurgerTest {
     @Mock
     Bun bun;
     @Mock
-    Ingredient ingredient;
+    Ingredient firstIngredient;
     @Mock
-    Ingredient ingredient1;
+    Ingredient secondIngredient;
 
     @Test
     public void setBunsBunObjectAssignsValueToTheBunVariable() {
@@ -30,46 +30,46 @@ public class BurgerTest {
 
     @Test
     public void addIngredientIngredientObjectIngredientAddsToList() {
-        burger.addIngredient(ingredient);
-        assertTrue(burger.ingredients.contains(ingredient));
+        burger.addIngredient(firstIngredient);
+        assertTrue(burger.ingredients.contains(firstIngredient));
     }
 
     @Test
     public void removeIngredientIndexOfIngredientRemovesIngredientFromListOfIngredients() {
-        burger.addIngredient(ingredient);
+        burger.addIngredient(firstIngredient);
         burger.removeIngredient(0);
         assertTrue(burger.ingredients.isEmpty());
     }
 
     @Test
     public void moveIngredientIndexesOfIngredientsMovesIngredients() {
-        burger.addIngredient(ingredient);
-        burger.addIngredient(ingredient1);
+        burger.addIngredient(firstIngredient);
+        burger.addIngredient(secondIngredient);
         burger.moveIngredient(1, 0);
-        assertEquals(ingredient, burger.ingredients.get(1));
-        assertEquals(ingredient1, burger.ingredients.get(0));
+        assertEquals(firstIngredient, burger.ingredients.get(1));
+        assertEquals(secondIngredient, burger.ingredients.get(0));
     }
 
     @Test
     public void getPriceReturnsPriceOfBurger() {
         burger.setBuns(bun);
-        burger.addIngredient(ingredient);
-        Mockito.when(bun.getPrice()).thenReturn(100.0f);
-        Mockito.when(ingredient.getPrice()).thenReturn(100.0f);
-        assertEquals(300.0, burger.getPrice(), 0);
+        burger.addIngredient(firstIngredient);
+        Mockito.when(bun.getPrice()).thenReturn(50.0f);
+        Mockito.when(firstIngredient.getPrice()).thenReturn(100.0f);
+        assertEquals(200.0, burger.getPrice(), 0);
     }
 
     @Test
     public void getReceiptReturnsReceiptOfBurger() {
         burger.setBuns(bun);
-        burger.addIngredient(ingredient);
-        Mockito.when(bun.getPrice()).thenReturn(100.0f);
-        Mockito.when(ingredient.getPrice()).thenReturn(100.0f);
+        burger.addIngredient(firstIngredient);
+        Mockito.when(bun.getPrice()).thenReturn(50.0f);
+        Mockito.when(firstIngredient.getPrice()).thenReturn(60.0f);
         Mockito.when(bun.getName()).thenReturn("black bun");
-        Mockito.when(ingredient.getType()).thenReturn(IngredientType.SAUCE);
-        Mockito.when(ingredient.getName()).thenReturn("ketchup");
-        String expected = String.format("(==== %s ====)%n= %s %s =%n(==== %s ====)%n%nPrice: %f%n", bun.getName(), ingredient.getType().toString().toLowerCase(),
-                ingredient.getName(), bun.getName(), burger.getPrice());
+        Mockito.when(firstIngredient.getType()).thenReturn(IngredientType.SAUCE);
+        Mockito.when(firstIngredient.getName()).thenReturn("ketchup");
+        String expected = String.format("(==== %s ====)%n= %s %s =%n(==== %s ====)%n%nPrice: %f%n", bun.getName(), firstIngredient.getType().toString().toLowerCase(),
+                firstIngredient.getName(), bun.getName(), burger.getPrice());
         assertEquals(expected, burger.getReceipt());
     }
 

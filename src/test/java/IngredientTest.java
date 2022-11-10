@@ -11,17 +11,17 @@ public class IngredientTest {
     private IngredientType ingredientType;
     private String name;
     private float price;
-    private IngredientType expected1;
-    private String expected2;
-    private float expected3;
+    private IngredientType expectedIngredientType;
+    private String expectedName;
+    private float expectedPrice;
 
-    public IngredientTest(IngredientType ingredientType, String name, float price, IngredientType expected1, String expected2, float expected3) {
+    public IngredientTest(IngredientType ingredientType, String name, float price, IngredientType expectedIngredientType, String expectedName, float expectedPrice) {
         this.ingredientType = ingredientType;
         this.name = name;
         this.price = price;
-        this.expected1 = expected1;
-        this.expected2 = expected2;
-        this.expected3 = expected3;
+        this.expectedIngredientType = expectedIngredientType;
+        this.expectedName = expectedName;
+        this.expectedPrice = expectedPrice;
     }
 
     @Parameterized.Parameters
@@ -36,18 +36,18 @@ public class IngredientTest {
     @Test
     public void getTypeReturnsTypeOfIngredient() {
         Ingredient ingredient = new Ingredient(ingredientType, name, price);
-        assertEquals(expected1, ingredient.getType());
+        assertEquals(expectedIngredientType, ingredient.getType());
     }
 
     @Test
     public void getNameReturnsNameOfIngredient() {
         Ingredient ingredient = new Ingredient(ingredientType, name, price);
-        assertEquals(expected2, ingredient.getName());
+        assertEquals(expectedName, ingredient.getName());
     }
 
     @Test
     public void getPriceReturnsPriceOfIngredient() {
         Ingredient ingredient = new Ingredient(ingredientType, name, price);
-        assertEquals(expected3, ingredient.getPrice(), 0);
+        assertEquals(expectedPrice, ingredient.getPrice(), 0);
     }
 }
